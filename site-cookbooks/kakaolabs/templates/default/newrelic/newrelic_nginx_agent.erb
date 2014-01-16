@@ -1,0 +1,63 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          newrelic_nginx_agent
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the newrelic_nginx_agent
+# Description:       starts newrelic_nginx_agent using start-stop-daemon
+### END INIT INFO
+
+RUN_DIR=/opt/newrelic_nginx_agent
+NAME=newrelic_nginx_agent
+DESC=newrelic_nginx_agent
+PID=${RUN_DIR}/newrelic_nginx_agent.pid
+
+start_newrelic_nginx_agent() {
+    echo -n "Starting $DESC: "
+    if [ -f $PID ]
+    then
+        echo "$NAME already run"
+    else
+        su newrelic -s /bin/sh -c "cd $RUN_DIR; ./newrelic_nginx_agent.daemon start"
+        echo "$NAME."
+    fi
+}
+
+stop_newrelic_nginx_agent() {
+    echo -n "Stopping $DESC: "
+    if [ -f $PID ]
+    then
+        su newrelic -s /bin/sh -c "cd $RUN_DIR; ./newrelic_nginx_agent.daemon stop"
+        echo "$NAME."
+    else
+        echo "$NAME does not run"
+    fi
+}
+
+
+case "$1" in
+	start)
+        start_newrelic_nginx_agent
+		;;
+
+	stop)
+        stop_newrelic_nginx_agent
+		;;
+
+	restart|force-reload)
+        stop_newrelic_nginx_agent
+        sleep 1
+        start_newrelic_nginx_agent
+		;;
+	*)
+		echo "Usage: $NAME {start|stop|restart}" >&2
+		exit 1
+		;;
+esac
+
+exit 0
+
+

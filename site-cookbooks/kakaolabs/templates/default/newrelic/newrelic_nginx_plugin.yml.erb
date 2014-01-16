@@ -1,0 +1,17 @@
+newrelic:
+  license_key: <%= node.app.environment.NEW_RELIC_LICENSE_KEY %>
+  verbose: 1
+
+agents:
+  nginx_status_agent:
+    -
+      instance_name: <%= node.app.hostname %>
+      status_url: http://localhost:8090/nginx_status
+#      http_user: status
+#      http_pass: status_pass
+#    -
+#      instance_name: example.org
+#      status_url: http://example.org/status
+#    -
+#      instance_name: example.com
+#      status_url: http://example.com/status

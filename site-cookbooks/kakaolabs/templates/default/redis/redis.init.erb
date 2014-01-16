@@ -1,0 +1,56 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          redis
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the redis database server
+# Description:       starts redis using start-stop-daemon
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DAEMON=/usr/local/bin/redis-server
+DAEMON_OPTS=<%= @redis[:conf_dir] %>/redis.conf
+NAME=redis
+DESC=redis
+PID=<%= @redis[:pid_file] %>
+
+start_redis() {
+  echo -n "Starting $DESC: "
+  start-stop-daemon --start --quiet --pidfile $PID --chuid redis:redis \
+      --exec $DAEMON -- $DAEMON_OPTS || true
+  echo "$NAME."
+}
+
+stop_redis() {
+  echo -n "Stopping $DESC: "
+  start-stop-daemon --stop --quiet --pidfile $PID \
+      --exec $DAEMON || true
+  echo "$NAME."
+}
+
+
+case "$1" in
+	start)
+    start_redis
+		;;
+
+	stop)
+    stop_redis
+		;;
+
+	restart|force-reload)
+    stop_redis
+    sleep 1
+    start_redis
+		;;
+	*)
+		echo "Usage: $NAME {start|stop|restart}" >&2
+		exit 1
+		;;
+esac
+
+exit 0
+
