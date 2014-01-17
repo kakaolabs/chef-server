@@ -67,8 +67,8 @@ bash "create folders" do
   mkdir -p #{app_dir}/releases/$COMMIT
   git clone #{node.app.repo_url} #{app_dir}/releases/$COMMIT
 
-  rm -rf /srv/simpleprints/current
-  ln -s #{app_dir}/releases/$COMMIT /srv/simpleprints/current
+  rm -rf /srv/#{app_name}/current
+  ln -s #{app_dir}/releases/$COMMIT /srv/#{app_name}/current
 
   chown -R #{node.app.user} #{app_dir}
   EOH

@@ -12,4 +12,4 @@ cookbook 'rabbitmq'
 cookbook 'application'
 cookbook 'application_python'
 cookbook 'application_nginx'
-
+cookbook 'postgresql'

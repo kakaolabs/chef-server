@@ -1,0 +1,21 @@
+{
+  "nginx": {
+    "version": "1.5.4",
+    "default_site_enabled": false,
+    "worker_rlimit_nofile": 100000,
+    "worker_connections": 100000,
+    "source": {
+      "modules": [
+        "http_ssl_module",
+        "http_gzip_static_module",
+        "http_stub_status_module"
+      ]
+    }
+  },
+
+  "run_list": [
+    "recipe[kakaolabs::tuning]",
+    "recipe[kakaolabs::dotfile]",
+  ]
+
+}

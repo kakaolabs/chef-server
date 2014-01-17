@@ -74,7 +74,15 @@ $> ssh vagrant@192.22.88.101 -i ~/.vagrant.d/insecure_private_key
 
 ```
 
-## 3. Using chef and knife to set up machine
+## 3. Using Cheffile
+If we modify content of cheffile, we need to run this command to update cookbooks folder
+
+```
+$> librarian-chef install
+```
+
+
+## 4. Using chef and knife to set up machine
 
 + Set up `chef` and `knife` in our machine
 
@@ -96,7 +104,7 @@ $> knife solo prepare root@192.22.88.101 -i ~/.vagrant.d/insecure_private_key
 $> knife solo cook root@192.22.88.101 -i ~/.vagrant.d/insecure_private_key -V
 ```
 
-## 4. Flow to use `vagrant` and `knife` to set up machine
+## 5. Flow to use `vagrant` and `knife` to set up machine
 
 + Install `vagrant-vbox-snapshot` for saving vagrant snapshot
 
@@ -110,4 +118,3 @@ to state before it, fix the scripts in `site-cookbooks` folder and `knife`
 again.
 
 This flow can do until we get the correct configuration
-
