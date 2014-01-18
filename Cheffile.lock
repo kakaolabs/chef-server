@@ -27,11 +27,6 @@ SITE
       runit (>= 0.0.0)
       yum (>= 0.0.0)
     ohai (1.1.12)
-    openssl (1.1.0)
-    postgresql (3.3.4)
-      apt (>= 0.0.0)
-      build-essential (>= 0.0.0)
-      openssl (>= 0.0.0)
     python (1.4.0)
       build-essential (>= 0.0.0)
       yum (>= 0.0.0)
@@ -47,6 +42,14 @@ SITE
     supervisor (0.4.8)
       python (>= 0.0.0)
     yum (2.3.2)
+
+GIT
+  remote: https://github.com/phlipper/chef-postgresql.git
+  ref: master
+  sha: 2c412e2f1aebce50d84fe13a3d9c6c544004fad6
+  specs:
+    postgresql (0.13.0)
+      apt (>= 1.9.0)
 
 DEPENDENCIES
   application (>= 0)

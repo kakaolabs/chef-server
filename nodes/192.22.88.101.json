@@ -13,9 +13,24 @@
     }
   },
 
+  "app": {
+    "hostname": "web-kakaolabs"
+  },
+
   "run_list": [
     "recipe[kakaolabs::tuning]",
     "recipe[kakaolabs::dotfile]",
+    "recipe[postgresql]",
+    "recipe[postgresql::client]",
+    "recipe[postgresql::server]",
+    "recipe[postgresql::configuration]",
+    "recipe[postgresql::data_directory]",
+    "recipe[postgresql::contrib]",
+    "recipe[postgresql::libpq]",
+    "recipe[postgresql::pg_database]",
+    "recipe[postgresql::pg_user]",
+    "recipe[postgresql::service]",
+    "recipe[kakaolabs::postgresql]"
   ]
 
 }
